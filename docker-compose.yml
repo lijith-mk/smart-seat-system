@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  seatsmart-server:
+    build: .
+    ports:
+      - "3001:3001"
+    volumes:
+      - .:/app
+    environment:
+      - SERIAL_PORT=COM3
+    # For Windows, we need to use a different approach for serial communication
+    # This configuration allows the container to access the host's serial ports
+    stdin_open: true
+    tty: true

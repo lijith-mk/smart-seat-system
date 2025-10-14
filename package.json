@@ -1,0 +1,17 @@
+{
+  "name": "seatsmart-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard for seat occupancy detection using FSR and PIR sensors",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "serialport": "^12.0.0",
+    "socket.io": "^4.7.2"
+  },
+  "keywords": ["arduino", "fsr", "pir", "seat-detection"],
+  "author": "SeatSmart",
+  "license": "MIT"
+}
