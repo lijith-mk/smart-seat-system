@@ -29,20 +29,24 @@ let latestData = {
 
 let serialPortInstance = null;
 
-// List available ports
-SerialPort.list().then(ports => {
-  console.log('Available serial ports:');
-  if (ports.length === 0) {
-    console.log('No serial ports found. Please connect your Arduino and restart the server.');
-  } else {
-    ports.forEach(port => {
-      console.log(`- ${port.path} (${port.manufacturer || 'Unknown device'})`);
-    });
-    console.log(`\nAttempting to connect to: ${SERIAL_PORT}`);
-  }
-}).catch(err => {
-  console.error('Error listing serial ports:', err.message);
-});
+// List available ports only when serial is enabled
+if (SERIAL_PORT !== "none") {
+  SerialPort.list().then(ports => {
+    console.log('Available serial ports:');
+    if (ports.length === 0) {
+      console.log('No serial ports found. Please connect your Arduino and restart the server.');
+    } else {
+      ports.forEach(port => {
+        console.log(`- ${port.path} (${port.manufacturer || 'Unknown device'})`);
+      });
+      console.log(`\nAttempting to connect to: ${SERIAL_PORT}`);
+    }
+  }).catch(err => {
+    console.error('Error listing serial ports:', err.message);
+  });
+} else {
+  console.log('Serial disabled (SERIAL_PORT=none); skipping port listing');
+}
 
 // Only try to connect to serial port if SERIAL_PORT is not set to "none"
 if (SERIAL_PORT !== "none") {
